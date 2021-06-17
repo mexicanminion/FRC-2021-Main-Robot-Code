@@ -15,10 +15,16 @@ public class Winch extends SubsystemBase {
   /** Creates a new Winch. */
   VictorSPX winch;
 
+  /**
+   * called once to set up winch
+   */
   private void initWinch(){
     winch = new VictorSPX(Constants.CANWinch);//VictorSPX firmware updated
   }
 
+  /**
+   * constructor
+   */
   public Winch() {
     initWinch();
   }
@@ -28,6 +34,11 @@ public class Winch extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  /**
+   * called periodcially to update winch
+   * Used by OP
+   * HOLD Dpad UP - ACTIVATE
+   */
   public void winchUp(){
     if(Robot.oi.getPOVOp() == 0){
       winch.set(ControlMode.PercentOutput, -.5);

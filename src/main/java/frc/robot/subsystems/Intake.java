@@ -16,6 +16,9 @@ public class Intake extends SubsystemBase {
 
   TalonSRX intake;
 
+  /**
+   * calls once to set up intake class
+   */
   public void intakeInit(){
 
     intake = new TalonSRX(Constants.CANIntake);
@@ -23,6 +26,9 @@ public class Intake extends SubsystemBase {
   
   }
 
+  /**
+   * constructor
+   */
   public Intake() {
     intakeInit();
   }
@@ -32,18 +38,33 @@ public class Intake extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  /**
+   * intakes balls
+   */
   public void ballIn(){
     intake.set(TalonSRXControlMode.PercentOutput, -1);
   }
   
+  /**
+   * out takes balls
+   */
   public void ballOut(){
     intake.set(TalonSRXControlMode.PercentOutput, 1);
   }
   
+  /**
+   * stops intake motor
+   */
   public void ballStop(){
     intake.set(TalonSRXControlMode.PercentOutput, 0);
   }
 
+  /**
+   * called periodically to update intake
+   * used by OP
+   * HOLD A - INTAKE
+   * HOLD A + RightBumber - OUTTAKE
+   */
   public void teleIntake(){
     
     if(Robot.oi.getControllerButtonStateOp(Constants.XBoxButtonA) && Robot.oi.getControllerButtonStateOp(Constants.XBoxButtonTriggerRight)){
